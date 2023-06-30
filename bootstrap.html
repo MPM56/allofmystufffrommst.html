@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <title>Bootstrap demo</title>
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+              crossorigin="anonymous">
+</head>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+       <div class="container-fluid">
+              <a class="navbar-brand" href="#">:D the randomness of smiley</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                     aria-expanded="false" aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                   <a class="nav-link active" aria-current="page" href="bootstrap.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                   <a class="nav-link" id="popular_movies" href="#">Popular Movies</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                          aria-expanded="false">
+                                          Dropdown
+                                   </a>
+                                   <ul class="dropdown-menu">
+                                          <li><a class="dropdown-item" href="#">Action</a></li>
+                                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                                          <li>
+                                                 <hr class="dropdown-divider">
+                                          </li>
+                                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                   </ul>
+                            </li>
+                            <li class="nav-item">
+                                   <a class="nav-link"id="joke">Tell Me A Joke!</a>
+                            </li>
+                     </ul>
+                     <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" id="search" placeholder="Search"
+                                   aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit" id="submit">Search</button>
+                     </form>
+              </div>
+       </div>
+</nav>
+
+<body>
+       <h1 id="page_title">Hello, world! </h1>
+       <h4>I’m bringing home a baby bumblebee,<br>
+              Won’t my mommy be so proud of me,<br>
+              I’m bringing home a baby bumblebee,<br>
+              Ouch! He stung me!<br>
+              
+              I’m squishing up a baby bumblebee,<br>
+              Won’t my mommy be so proud of me,<br>
+              I’m squishing up a baby bumblebee,<br>
+              Eww! He’s gooey!<br>
+              
+              I’m lickin’ up a baby bumble bee<br>
+              Won’t my Mommy be so proud of me<br>
+              I’m lickin’ up my baby bumble bee<br>
+              Mmm! He’s yummy!</h4>
+
+       <div class="container-fluid">
+              <div id="movielist"></div>
+       </div>
+       <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+              integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+              crossorigin="anonymous"></script>
+
+       <script>
+              $(document).ready(function () {
+
+                     $("#popular_movies").click(function () {
+                            $("#movielist").empty();
+                            // alert("don't be afraid to be yourself. don't always follow the popular crowd");
+                            //alert("do not click ok if you are a serial killer");
+                            // function to load popular movies from TMDB on document ready
+                            var api_key = "ce283f8ff68c019530c5f5ccf045de2d"; //TODO insert your unique API KEY here
+
+                            var api_url = "https://api.themoviedb.org/3/movie/popular?api_key=" + api_key;
+                            $.getJSON(api_url, function (data) {
+                                   $.each(data.results, function (i, item) {
+                                          console.log(item)
+                                          var posterFullUrl = "https://image.tmdb.org/t/p/w185//" + item.poster_path;
+                                          var img = "<img src='" + posterFullUrl + "' title='" + item.title + " (" + item.release_date.substring(0, 4) + ")'/>";
+                                          $("#movielist").append(img);
+                                          $("#movielist_title").text("Popular Movies");
+                                   });
+                            });
+                            $("#page_title").text("Popular Movies")
+                     });
+                     $("#submit").click(function () {
+                            alert("search value = " + $("#search").val());
+                     })
+                     // joke api
+                     $("#joke").click(function () {
+                            console.log("testing joke api");
+                            var joke_url = "https://official-joke-api.appspot.com/random_joke";
+                            $.getJSON(joke_url, function (data) {
+                                   $("#exampleModalLabel").text(data.setup);
+                                   $("#punchline").text(data.punchline);
+                                   console.log(data);
+                            });
+                     });
+              });
+       </script>
+</body>
+
+</html>

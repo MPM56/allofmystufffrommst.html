@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+       <meta charset="utf-8">
+       <title>Demo</title>
+       <style>
+              div {
+                     height: 20px;
+                     width: 20px;
+                     background-color: rgb(255, 181, 233);
+              }
+
+              div.odd {
+                     background-color: rgb(255, 118, 118);
+              }
+       </style>
+</head>
+
+<body>
+
+       <a href="http://jquery.com/">jQuery</a>
+       <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+              integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+       <br>
+       <h5>Please enter your favorite animal for a chance to win it!(Plural Please)</h5>
+       <input type="text" id="name" placeholder="animal">
+       <br>
+       <input type="button" value="Submit" id="btn">
+       <br>
+       <h5>Please enter two numbers to multiply them!</h5>
+       <input type="text" id="num1" placeholder="first number">
+
+       <body>*</body> <input type="text" id="num2" placeholder="second number">
+       <br>
+       <input type="button" value="Submit" id="btn2">
+
+       <div class="odd"></div>
+       <div class=" even"></div>
+       <div class="odd"></div>
+       <div class=" even"></div>
+       <div class="odd"></div>
+       <div class=" even"></div>
+       <div class="odd"></div>
+       <div class=" even"></div>
+       <div class="odd"></div>
+       <div class=" even"></div>
+
+       <script>
+              // Your code goes here. 	
+              $(document).ready(function () {
+
+                     $("a").click(function (event) {
+
+                            alert("Thanks for visiting!");
+
+                     });
+
+                     $("#btn").click(function (event) {
+                            alert("They are lovely, " + $("#name").val());
+                     });
+                     $("#btn2").click(function (event) {
+                            var num1 = $("#num1").val();
+                            var num2 = $("#num2").val();
+                            alert("The answer to your math question is " + (num1 * num2));
+                     });
+
+                     $(".odd").click(function () {
+                            alert("Why are you clicking random things? Your supposed to be a good child and not click on the red buttons!")
+                     });
+
+              });
+
+       </script>
+
+</body>
+
+</html>
